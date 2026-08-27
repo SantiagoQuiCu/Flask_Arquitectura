@@ -1,5 +1,5 @@
 from flaskr import create_app
-from .modelos import db, Cancion , Album
+from .modelos import db, Cancion , Album , Usuario , Medio
 
 app = create_app('default')
 app_context = app.app_context()
@@ -11,12 +11,8 @@ db.create_all()
 #prueba
 
 with app.app_context():
-    c = Cancion(titulo ='Prueba', minutos=2, segundos=25 , interprete ="Santiago")
-    c2 = Cancion(titulo ='Prueba2', minutos=2, segundos=25 , interprete ="Santiag")
-    db.session.add(c2)
-    db.session.commit()
-    print(Cancion.query.all())
-    a = Album(titulo ='PruebaAlbum', anio=2024, descripcion ="Descripcion de prueba")
+    a = Album(titulo='Album2', anio=2023, descripcion='Descripcion del album 2', medio=Medio.CD, usuario=1)
+    Cancion2 = Cancion.query.get(2)
+    Cancion2.albumes.append(a)
     db.session.add(a)
     db.session.commit()
-    print(Album.query.all())
